@@ -48,14 +48,10 @@ int temperature = 1;
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  //int temperature = readTemp();
-  //int numberOfdigits = numberOfDigits(temperature);
-
   float temperatureFromModule;
   float humidity;
   int tempToDisplay = (temperature * 9.0)/ 5.0 + 32.0;
-  //int tempToDisplay = temperature;
+  // int tempToDisplay = temperature;
   
 
   // /* Measure temperature and humidity.  If the functions returns
@@ -70,7 +66,6 @@ void loop() {
   for(int i = 0; i < numberOfdigits; i++){
     int display = int(tempToDisplay) % 10;
     displayNumber(display,i);
-    //delay(500);
     tempToDisplay = tempToDisplay / 10;
   
   }
@@ -110,16 +105,15 @@ int numberOfDigits(int number) {
   return count;
 }
 
+
+// Used for old temperature sensor (CURRENTLY NOT USED)
 int readTemp() {
   int tempReading = analogRead(0);
   double tempK = log(10000.0 * ((1024.0 / tempReading - 1)));
   tempK = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * tempK * tempK )) * tempK );       //  Temp Kelvin
-  //temp = tempK - 273.15;            // Convert Kelvin to Celcius
   float tempC = tempK - 273.15; 
   float tempF = (tempC * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
-  return int(tempC);
-  //
-
+  return int(tempF);
 }
 
 static bool measure_environment( float *temperature, float *humidity )
